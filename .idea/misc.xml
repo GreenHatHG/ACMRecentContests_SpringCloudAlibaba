@@ -11,6 +11,9 @@
         <option value="$PROJECT_DIR$/acm-service-register/pom.xml" />
         <option value="$PROJECT_DIR$/acm-gateway/pom.xml" />
         <option value="$PROJECT_DIR$/acm-service-mail/pom.xml" />
+        <option value="$PROJECT_DIR$/acm-service-userinfo/pom.xml" />
+        <option value="$PROJECT_DIR$/acm-commons-redis-utils/pom.xml" />
+        <option value="$PROJECT_DIR$/acm-commons-utils/pom.xml" />
       </list>
     </option>
   </component>

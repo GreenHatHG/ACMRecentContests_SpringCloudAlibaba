@@ -28,6 +28,7 @@
 
         <hutool-all.version>5.0.5</hutool-all.version>
         <argon2-jvm.version>2.5</argon2-jvm.version>
+        <java-jwt.version>3.8.2</java-jwt.version>
     </properties>
 
     <dependencyManagement>

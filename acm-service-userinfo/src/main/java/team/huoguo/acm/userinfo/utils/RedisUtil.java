@@ -1,4 +1,4 @@
-package team.huoguo.acm.mail.utils;
+package team.huoguo.acm.userinfo.utils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;

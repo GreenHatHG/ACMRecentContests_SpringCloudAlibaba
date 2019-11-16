@@ -15,9 +15,9 @@ public class VerificationService {
     @Autowired
     private RedisUtil redisUtil;
 
-    public Boolean verify(String mail, String code){
-        if(("register"+code).equals(redisUtil.getString(mail))){
-            redisUtil.deleteKey(mail);
+    public Boolean verify(String key, String value){
+        if((value).equals(redisUtil.getString(key))){
+            redisUtil.deleteKey(key);
             return true;
         }
         return false;

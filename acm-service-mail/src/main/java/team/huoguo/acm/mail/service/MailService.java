@@ -36,13 +36,14 @@ public class MailService {
     private RedisUtil redisUtil;
 
     @StreamListener("input")
-    public void receive(String mail){
+    public void receive(String info){
         Context context = new Context();
         String code = RandomUtil.randomNumbers(6);
         context.setVariable("registerCode", code);
         String emailTemplate = templateEngine.process("regCode", context);
-        sendTemplateEmail("ACM赛事提醒与管理平台", emailTemplate, mail);
-        redisUtil.setString(mail, "register"+code);
+        String[] s = info.split(",");
+        sendTemplateEmail("ACM赛事提醒与管理平台", emailTemplate, s[0]);
+        redisUtil.setString(s[0]+s[1], code);
     }
 
     /**

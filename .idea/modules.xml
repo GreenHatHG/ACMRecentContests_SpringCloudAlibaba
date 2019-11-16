@@ -3,10 +3,11 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/acm-commons-controller/acm-commons-controller.iml" filepath="$PROJECT_DIR$/acm-commons-controller/acm-commons-controller.iml" />
+      <module fileurl="file://$PROJECT_DIR$/acm-commons-utils/acm-commons-utils.iml" filepath="$PROJECT_DIR$/acm-commons-utils/acm-commons-utils.iml" />
       <module fileurl="file://$PROJECT_DIR$/acm-dependencies/acm-dependencies.iml" filepath="$PROJECT_DIR$/acm-dependencies/acm-dependencies.iml" />
       <module fileurl="file://$PROJECT_DIR$/acm-gateway/acm-gateway.iml" filepath="$PROJECT_DIR$/acm-gateway/acm-gateway.iml" />
       <module fileurl="file://$PROJECT_DIR$/acm-service-mail/acm-service-mail.iml" filepath="$PROJECT_DIR$/acm-service-mail/acm-service-mail.iml" />
-      <module fileurl="file://$PROJECT_DIR$/acm-service-register/acm-service-register.iml" filepath="$PROJECT_DIR$/acm-service-register/acm-service-register.iml" />
+      <module fileurl="file://$PROJECT_DIR$/acm-service-userinfo/acm-service-userinfo.iml" filepath="$PROJECT_DIR$/acm-service-userinfo/acm-service-userinfo.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/spring-cloud-alibaba-acm.iml" filepath="$PROJECT_DIR$/.idea/spring-cloud-alibaba-acm.iml" />
     </modules>
   </component>

@@ -1,6 +1,7 @@
 package team.huoguo.acm.mail.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,6 +15,7 @@ import javax.validation.constraints.Size;
  */
 
 @RestController
+@Validated
 public class VerificationController {
 
     @Autowired
@@ -21,7 +23,8 @@ public class VerificationController {
 
     @PostMapping("/code")
     public String verify(@RequestParam @NotBlank @Size(max = 30) String mail,
-                          @RequestParam @NotBlank @Size(max = 30) String code){
-        return verificationService.verify(mail, code) ? "ok" : "验证码已过期";
+                          @RequestParam @NotBlank @Size(max = 30) String code,
+                         @RequestParam @NotBlank @Size(max = 30) String type){
+        return verificationService.verify(mail+type, code) ? "ok" : "验证码已过期";
     }
 }

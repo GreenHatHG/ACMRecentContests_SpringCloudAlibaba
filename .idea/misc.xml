@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JavaScriptSettings">
+    <option name="languageLevel" value="ES6" />
+  </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/acm-dependencies/pom.xml" />
+        <option value="$PROJECT_DIR$/acm-commons-controller/pom.xml" />
+        <option value="$PROJECT_DIR$/acm-service-register/pom.xml" />
+        <option value="$PROJECT_DIR$/acm-gateway/pom.xml" />
+        <option value="$PROJECT_DIR$/acm-service-mail/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="false" project-jdk-name="11" project-jdk-type="JavaSDK" />
+</project>

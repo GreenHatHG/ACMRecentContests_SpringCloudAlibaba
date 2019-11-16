@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
  * @author GreenHatHG
  */
 
-@FeignClient(value = "mail", fallback = MailServiceFallback.class)
+@FeignClient(value = "acm-service-mail", fallback = MailServiceFallback.class)
 public interface MailService {
 
     @PostMapping("/code")

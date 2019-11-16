@@ -3,6 +3,8 @@ package team.huoguo.acm.gateway.filter;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Maps;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
@@ -12,7 +14,10 @@ import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
+import team.huoguo.acm.commons.utils.JWTUtil;
+import team.huoguo.acm.gateway.service.feign.UserInfoService;
 
+import java.util.Arrays;
 import java.util.Map;
 
 /**
@@ -21,17 +26,30 @@ import java.util.Map;
  */
 @Component
 public class AuthFilter implements GlobalFilter, Ordered {
+
+    @Value("${auth.skip.urls}")
+    private String[] skipAuthUrls;
+
+    @Autowired
+    private UserInfoService userInfoService;
+
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        String token = exchange.getRequest().getQueryParams().getFirst("token");
-        if (token == null || token.isEmpty()) {
+        String url = exchange.getRequest().getURI().getPath();
+        //跳过不需要验证的路径
+        if(Arrays.asList(skipAuthUrls).contains(url)){
+            return chain.filter(exchange);
+        }
+        //从请求头中取出token
+        String token = exchange.getRequest().getHeaders().getFirst("Authorization");
+        if (token == null || token.isEmpty() ||
+                !JWTUtil.verify(token, JWTUtil.getId(token),
+                        userInfoService.getPassword(JWTUtil.getId(token)))) {
             ServerHttpResponse response = exchange.getResponse();
-
             // 封装错误信息
             Map<String, Object> responseData = Maps.newHashMap();
             responseData.put("code", 401);
             responseData.put("message", "非法请求");
-            responseData.put("cause", "Token is empty");
 
             try {
                 // 将信息转换为 JSON
@@ -57,6 +75,8 @@ public class AuthFilter implements GlobalFilter, Ordered {
      */
     @Override
     public int getOrder() {
-        return Ordered.LOWEST_PRECEDENCE;
+        return Ordered.HIGHEST_PRECEDENCE;
     }
+
+
 }

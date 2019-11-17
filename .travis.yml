@@ -1,0 +1,25 @@
+language: java
+
+jdk:
+  - oraclejdk8
+
+cache:
+  directories:
+  - '$HOME/.m2/repository'
+
+script:
+  - mvn clean package -DskipTests=true
+
+after_success:
+  - ls -lt
+
+branches:
+  only:
+    - master
+
+notifications:
+  email: false
+
+env:
+  global:
+  - GH_REF=https://github.com/GreenHatHG/ACMRecentContests_SpringCloudAlibaba.git

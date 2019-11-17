@@ -25,10 +25,14 @@ script:
   - cd acm-gateway
   - mvn package -DskipTests=true
   - cd target
-  - wget https://github.com/timvisee/ffsend/releases/download/v0.2.55/ffsend-v0.2.55-linux-x64-static
-  - mv ./ffsend-* ./ffsend
-  - chmod a+x ./ffsend
-  - ./ffsend upload acm-gateway-1.0.jar
+  - cp ../../dockerfile .
+  - sed 'COPY acm-gateway-1.0.jar /app/' dockerfile
+  - sed 'CMD java -jar /app/acm-gateway-1.0.jar' dockerfile
+  - apt-get install sshpass scp -y
+
+  - sshpass -p ${gate-pwd} scp acm-commons-controller-1.0.jar dockerfile root@{gateway-ip}:/root/gateway
+  - sshpass -p ${gate-pwd} ssh -o StrictHostKeyChecking=no root@${gateway-ip} 'docker build -t gateway /root/gateway'
+  - sshpass -p ${gate-pwd} ssh -o StrictHostKeyChecking=no root@${gateway-ip} 'docker run -d gateway --network host --restart=always --name gateway gateway'
 
 after_success:
   - ls -lt

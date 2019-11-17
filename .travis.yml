@@ -33,9 +33,9 @@ script:
   - cp ../../dockerfile .
   - echo 'COPY acm-gateway-1.0.jar /app/' >> dockerfile
   - echo 'CMD java -jar /app/acm-gateway-1.0.jar' >> dockerfile
-  - sshpass -p gate-pwd scp acm-commons-controller-1.0.jar dockerfile root@gateway-ip:/root/gateway
-  - sshpass -p gate-pwd ssh -o StrictHostKeyChecking=no root@$gateway-ip 'docker build -t gateway /root/gateway'
-  - sshpass -p gate-pwd ssh -o StrictHostKeyChecking=no root@$gateway-ip 'docker run -d gateway --network host --restart=always --name gateway gateway'
+  - sshpass -p gatewaypwd scp acm-commons-controller-1.0.jar dockerfile root@gateway-ip:/root/gateway
+  - sshpass -p gatewaypwd ssh -o StrictHostKeyChecking=no root@gatewayip'docker build -t gateway /root/gateway'
+  - sshpass -p gatewaypwd ssh -o StrictHostKeyChecking=no root@gatewayip'docker run -d gateway --network host --restart=always --name gateway gateway'
 
 after_success:
   - ls -lt

@@ -31,6 +31,7 @@ script:
   - mvn package -DskipTests=true
   - cd target
   - cp ../../dockerfile .
+  - echo >> dockerfile
   - echo 'COPY acm-gateway-1.0.jar /app/' >> dockerfile
   - echo 'CMD java -jar /app/acm-gateway-1.0.jar' >> dockerfile
   - sshpass -p ${gatewaypwd} ssh -o StrictHostKeyChecking=no root@${gatewayip} 'docker stop gateway' || true
@@ -42,8 +43,9 @@ script:
   - sshpass -p ${gatewaypwd} ssh -o StrictHostKeyChecking=no root@${gatewayip} 'docker run -d --network host --name gateway --restart=always  gateway'
 
 after_success:
-  - docker images
-  - docker ps -a
+- sshpass -p ${gatewaypwd} ssh -o StrictHostKeyChecking=no root@${gatewayip} 'docker images'
+- sshpass -p ${gatewaypwd} ssh -o StrictHostKeyChecking=no root@${gatewayip} 'docker ps -a'
+
 
 branches:
   only:

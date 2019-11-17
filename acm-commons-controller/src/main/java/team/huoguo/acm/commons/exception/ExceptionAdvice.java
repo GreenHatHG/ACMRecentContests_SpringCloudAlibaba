@@ -22,6 +22,7 @@ import java.util.Set;
  * @author GreenHatHG
  */
 @RestControllerAdvice
+@ResponseBody
 public class ExceptionAdvice {
 
 
@@ -29,7 +30,7 @@ public class ExceptionAdvice {
      * 捕捉校验异常(ConstraintViolationException)
      * @return
      */
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(ConstraintViolationException.class)
     public Result validException(ConstraintViolationException e) {
         StringBuilder message = new StringBuilder();
@@ -47,7 +48,7 @@ public class ExceptionAdvice {
      * 捕捉所有自定义异常
      * @return
      */
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(CustomException.class)
     public Result handle(HttpServletRequest request, CustomException e) {
         return ResultFactory.buildCustomResult(e.getCode(), e.getMessage(), null);
@@ -57,7 +58,7 @@ public class ExceptionAdvice {
      * 捕捉404异常
      * @return
      */
-    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(NoHandlerFoundException.class)
     public Result handle(NoHandlerFoundException e) {
         return ResultFactory.buildVNotFoundResult(e.getMessage());
@@ -70,7 +71,6 @@ public class ExceptionAdvice {
      * @return
      */
     @ExceptionHandler(value =NullPointerException.class)
-    @ResponseBody
     public Result exceptionHandler(HttpServletRequest req, NullPointerException e){
         return ResultFactory.buildVNotFoundResult(e.getMessage());
     }
@@ -81,7 +81,7 @@ public class ExceptionAdvice {
      * @param ex
      * @return
      */
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(Exception.class)
     public Result globalException(HttpServletRequest request, Throwable ex) {
         return ResultFactory.buildCustomResult(this.getStatus(request).value(), ex.toString() + ": " + ex.getMessage(), null);

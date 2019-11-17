@@ -1,9 +1,12 @@
 package team.huoguo.acm.mail.service;
 
 import cn.hutool.core.util.RandomUtil;
+import cn.hutool.json.JSONObject;
+import cn.hutool.json.JSONUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
@@ -36,14 +39,18 @@ public class MailService {
     private RedisUtil redisUtil;
 
     @StreamListener("input")
-    public void receive(String info){
-        Context context = new Context();
-        String code = RandomUtil.randomNumbers(6);
-        context.setVariable("registerCode", code);
-        String emailTemplate = templateEngine.process("regCode", context);
-        String[] s = info.split(",");
-        sendTemplateEmail("ACM赛事提醒与管理平台", emailTemplate, s[0]);
-        redisUtil.setString(s[0]+s[1], code);
+    public void receive(String content){
+        JSONObject jsonObject = JSONUtil.parseObj(content);
+        if(!"remind".equals(jsonObject.get("type"))){
+            Context context = new Context();
+            String code = RandomUtil.randomNumbers(6);
+            context.setVariable("code", code);
+            String emailTemplate = templateEngine.process("code", context);
+            sendTemplateEmail("ACM赛事提醒与管理平台", emailTemplate, jsonObject.getStr("to"));
+            redisUtil.setString(jsonObject.getStr("to")+jsonObject.getStr("type"), code);
+        }else{
+            sendSimpleMail(jsonObject.getStr("to"), jsonObject.getStr("content"));
+        }
     }
 
     /**
@@ -63,7 +70,28 @@ public class MailService {
             helper.setText(body, true);
             javaMailSender.send(message);
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
+    }
+
+    /**
+     * 简单文本邮件
+     *
+     * @param to      收件人
+     * @param content 内容
+     */
+    public void sendSimpleMail(String to, String content) {
+        //创建SimpleMailMessage对象
+        SimpleMailMessage message = new SimpleMailMessage();
+        //邮件发送人
+        message.setFrom("acmrecentcontents@aliyun.com");
+        //邮件接收人
+        message.setTo(to);
+        //邮件主题
+        message.setSubject("ACM赛事提醒与管理平台");
+        //邮件内容
+        message.setText(content);
+        //发送邮件
+        javaMailSender.send(message);
     }
 }

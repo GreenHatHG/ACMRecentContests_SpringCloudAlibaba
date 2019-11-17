@@ -29,6 +29,8 @@
         <hutool-all.version>5.0.5</hutool-all.version>
         <argon2-jvm.version>2.5</argon2-jvm.version>
         <java-jwt.version>3.8.2</java-jwt.version>
+        <mysql-connector-java.version>8.0.15</mysql-connector-java.version>
+        <druid-spring-boot-starter.version>1.1.10</druid-spring-boot-starter.version>
     </properties>
 
     <dependencyManagement>

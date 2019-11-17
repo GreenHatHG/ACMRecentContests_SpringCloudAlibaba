@@ -19,6 +19,10 @@ public class ResultFactory {
         return new Result(success, message);
     }
 
+    public static Result buildFailResult(String message) {
+        return new Result(HttpStatus.BAD_REQUEST.value(), message);
+    }
+
     public static Result buildVNotFoundResult(String message) {
         return new Result(HttpStatus.NOT_FOUND.value(), message);
     }

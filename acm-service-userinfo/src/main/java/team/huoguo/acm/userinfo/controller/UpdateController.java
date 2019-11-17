@@ -14,6 +14,7 @@ import team.huoguo.acm.commons.exception.UniqueException;
 import team.huoguo.acm.commons.utils.JWTUtil;
 import team.huoguo.acm.userinfo.service.UserInfoService;
 import team.huoguo.acm.userinfo.service.feign.MailService;
+import team.huoguo.acm.userinfo.utils.Argon2Util;
 import team.huoguo.acm.userinfo.utils.FileHandleUtil;
 import team.huoguo.acm.userinfo.utils.RedisUtil;
 
@@ -46,7 +47,7 @@ public class UpdateController {
                         @RequestParam @NotBlank @Size(max = 30) String password){
         String message = mailService.verify(mail, code, "resetpwd");
         if(message.equals("ok")){
-            userInfoService.updateOne("mail", mail, "password", password);
+            userInfoService.updateOne("mail", mail, "password", Argon2Util.hash(password));
             return ResultFactory.buildSuccessResult("成功");
         }
         throw new UnauthorizedException(message);
@@ -74,7 +75,7 @@ public class UpdateController {
         return ResultFactory.buildSuccessResult("成功");
     }
 
-    @PutMapping("mail")
+    @PutMapping("/mail")
     public Result updateEmail(@NotBlank @Size(max = 30) String originalEmail,
                               @NotBlank @Size(max = 30)  String code,
                               @NotBlank @Size(max = 30) @Email String newEmail){
@@ -90,7 +91,7 @@ public class UpdateController {
         }
     }
 
-    @PutMapping("avatar")
+    @PutMapping("/avatar")
     public Result updateAvatar(HttpServletRequest request,
                                @NotBlank @Size(max = 100) String avatarUrl){
         String id = JWTUtil.getId(request.getHeader("Authorization"));

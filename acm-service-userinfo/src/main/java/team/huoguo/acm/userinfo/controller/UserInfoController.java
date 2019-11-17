@@ -32,7 +32,7 @@ public class UserInfoController {
 
     @GetMapping("/userinfo/password")
     public String getPassword(@RequestParam @NotBlank @Size(max = 30) String queryValue){
-        return userInfoService.findOne("password", queryValue).getPassword();
+        return userInfoService.findOne("id", queryValue).getPassword();
     }
 
 }

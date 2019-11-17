@@ -14,6 +14,7 @@
         <option value="$PROJECT_DIR$/acm-service-userinfo/pom.xml" />
         <option value="$PROJECT_DIR$/acm-commons-redis-utils/pom.xml" />
         <option value="$PROJECT_DIR$/acm-commons-utils/pom.xml" />
+        <option value="$PROJECT_DIR$/acm-service-remind/pom.xml" />
       </list>
     </option>
   </component>

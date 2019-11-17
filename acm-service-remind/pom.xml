@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>acm-dependencies</artifactId>
+        <groupId>team.huoguo</groupId>
+        <version>1.0</version>
+        <relativePath>../acm-dependencies/pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>acm-service-remind</artifactId>
+
+    <dependencies>
+        <!-- Projects Begin -->
+        <dependency>
+            <groupId>team.huoguo</groupId>
+            <artifactId>acm-commons-controller</artifactId>
+            <exclusions>
+                <exclusion>
+                        <groupId>org.springframework.cloud</groupId>
+                        <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+                </exclusion>
+            </exclusions>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>team.huoguo</groupId>
+            <artifactId>acm-commons-utils</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <!-- Projects End -->
+
+        <!-- Spring Boot Begin -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-quartz</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql-connector-java.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>${druid-spring-boot-starter.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+        </dependency>
+        <!-- Spring Boot End -->
+
+        <!-- Spring Cloud Begin -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-stream-rocketmq</artifactId>
+        </dependency>
+        <!-- Spring Cloud End -->
+
+    </dependencies>
+
+
+</project>

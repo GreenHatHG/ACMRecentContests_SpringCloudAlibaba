@@ -1,4 +1,4 @@
-package team.huoguo.acm.userinfo.service;
+package team.huoguo.acm.remind.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.integration.support.MessageBuilder;

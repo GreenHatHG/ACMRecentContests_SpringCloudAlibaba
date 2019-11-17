@@ -13,7 +13,6 @@ import javax.validation.constraints.Size;
 @Component
 public class UserInfoServiceFallback implements UserInfoService {
 
-
     @Override
     public String getPassword(@NotBlank @Size(max = 30) String queryValue) {
         return "";

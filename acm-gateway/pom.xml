@@ -60,28 +60,6 @@
         <!-- Projects Begin -->
         <dependency>
             <groupId>team.huoguo</groupId>
-            <artifactId>acm-commons-controller</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>team.huoguo</groupId>
-            <artifactId>acm-commons-utils</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
-        <!-- Projects End -->        <!-- Projects Begin -->
-        <dependency>
-            <groupId>team.huoguo</groupId>
-            <artifactId>acm-commons-controller</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>team.huoguo</groupId>
-            <artifactId>acm-commons-utils</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
-        <!-- Projects End -->        <!-- Projects Begin -->
-        <dependency>
-            <groupId>team.huoguo</groupId>
             <artifactId>acm-commons-utils</artifactId>
             <version>${project.parent.version}</version>
         </dependency>

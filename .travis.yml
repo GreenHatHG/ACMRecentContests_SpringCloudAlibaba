@@ -8,6 +8,27 @@ cache:
   - '$HOME/.m2/repository'
 
 script:
+  - cd acm-dependencies
+  - mvn clean package -DskipTests=true
+  - mvn install:install-file \
+    -Dfile=target/acm-dependencies-1.0.jar \
+    -DgroupId=team.huoguo \
+    -DartifactId=acm-dependencie -Dversion=1.0 -Dpackaging=jar
+  - cd ..
+  - cd acm-commons-utils
+  - mvn clean package -DskipTests=true
+  - mvn install:install-file \
+    -Dfile=target/acm-commons-utils-1.0.jar \
+    -DgroupId=team.huoguo \
+    -DartifactId=acm-commons-utils -Dversion=1.0 -Dpackaging=jar
+  - cd ..
+  - cd acm-commons-controller
+  - mvn clean package -DskipTests=true
+  - mvn install:install-file \
+      -Dfile=target/acm-commons-controller-1.0.jar \
+      -DgroupId=team.huoguo \
+      -DartifactId=acm-commons-controller -Dversion=1.0 -Dpackaging=jar
+  - cd ..
   - cd acm-gateway
   - mvn clean package -DskipTests=true
 

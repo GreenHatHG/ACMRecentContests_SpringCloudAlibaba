@@ -8,16 +8,6 @@ cache:
   - '$HOME/.m2/repository'
 
 script:
-  - cd acm-dependencies
-  - mvn clean package -DskipTests=true
-  - pwd
-  - ls -lt
-  - ls -lt target
-  - mvn install:install-file
-    -Dfile=target/acm-dependencies-1.0.jar
-    -DgroupId=team.huoguo
-    -DartifactId=acm-dependencie -Dversion=1.0 -Dpackaging=jar
-  - cd ..
   - cd acm-commons-utils
   - mvn clean package -DskipTests=true
   - mvn install:install-file
@@ -34,6 +24,8 @@ script:
   - cd ..
   - cd acm-gateway
   - mvn clean package -DskipTests=true
+  - ls -lt
+  - ls target
 
 after_success:
   - ls -lt

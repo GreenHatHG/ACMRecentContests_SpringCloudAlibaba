@@ -39,10 +39,11 @@ script:
   - sshpass -p ${gatewaypwd} ssh -o StrictHostKeyChecking=no root@${gatewayip} 'mkdir /root/gateway' || true
   - sshpass -p ${gatewaypwd} scp acm-gateway-1.0.jar dockerfile root@${gatewayip}:/root/gateway
   - sshpass -p ${gatewaypwd} ssh -o StrictHostKeyChecking=no root@${gatewayip} 'docker build -t gateway /root/gateway'
-  - sshpass -p ${gatewaypwd} ssh -o StrictHostKeyChecking=no root@${gatewayip} 'docker run -d --network host --restart=always --name gateway gateway'
+  - sshpass -p ${gatewaypwd} ssh -o StrictHostKeyChecking=no root@${gatewayip} 'docker run -d --network host --name gateway --restart=always  gateway'
 
 after_success:
-  - ls -lt
+  - docker images
+  - docker ps -a
 
 branches:
   only:

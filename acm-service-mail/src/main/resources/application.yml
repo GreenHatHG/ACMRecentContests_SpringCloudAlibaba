@@ -3,7 +3,7 @@ spring:
     stream:
       rocketmq:
         binder:
-          namesrv-addr: 127.0.0.1:9876
+          namesrv-addr: 45.76.50.69:9876
         bindings:
           input: {consumer.orderly: true}
       bindings:

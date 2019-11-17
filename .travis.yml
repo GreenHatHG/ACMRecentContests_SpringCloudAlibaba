@@ -8,6 +8,7 @@ cache:
   - '$HOME/.m2/repository'
 
 script:
+  - cd acm-gateway
   - mvn clean package -DskipTests=true
 
 after_success:

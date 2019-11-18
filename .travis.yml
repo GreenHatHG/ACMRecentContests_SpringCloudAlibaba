@@ -10,7 +10,10 @@ jdk:
 
 cache:
   directories:
-  - '$HOME/.m2/repository'
+  - $HOME/.m2
+
+install:
+  - ssh-keyscan ${gatewayip} >> ~/.ssh/known_hosts
 
 script:
   - cd acm-dependencies

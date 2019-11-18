@@ -182,6 +182,7 @@
     </build>
 
     <repositories>
+
         <repository>
             <id>aliyun-repos</id>
             <name>Aliyun Repository</name>

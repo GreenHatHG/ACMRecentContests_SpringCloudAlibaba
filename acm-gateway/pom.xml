@@ -15,27 +15,26 @@
     <name>acm-gateway</name>
 
     <dependencies>
-        <!-- Spring Boot Begin -->
+        <!-- Projects Begin -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
+            <groupId>team.huoguo</groupId>
+            <artifactId>acm-commons-utils</artifactId>
+            <version>${project.parent.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
+            <groupId>team.huoguo</groupId>
+            <artifactId>acm-commons-controller</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-web</artifactId>
+                </exclusion>
+            </exclusions>
+            <version>${project.parent.version}</version>
         </dependency>
-        <!-- Spring Boot End -->
+        <!-- Projects End -->
 
         <!-- Spring Cloud Begin -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
-        </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
@@ -43,10 +42,6 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-gateway</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
         </dependency>
         <!-- Spring Cloud End -->
 
@@ -57,13 +52,6 @@
         </dependency>
         <!-- Commons Begin -->
 
-        <!-- Projects Begin -->
-        <dependency>
-            <groupId>team.huoguo</groupId>
-            <artifactId>acm-commons-utils</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
-        <!-- Projects End -->
     </dependencies>
 
     <build>
@@ -77,4 +65,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>

@@ -20,7 +20,7 @@ install:
 
 script:
   - bash start.sh $gatewayip $gatewaypwd acm-dependencies acm-commons-controller acm-commons-utils
-  - docker login --username=$registryp registry.cn-hongkong.aliyuncs.com --password=$registryu >> /dev/null
+  - docker login --username=$registryu registry.cn-hongkong.aliyuncs.com --password=$registryp >> /dev/null
   - bash docker.sh
 
 branches:

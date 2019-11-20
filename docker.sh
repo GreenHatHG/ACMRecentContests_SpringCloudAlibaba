@@ -1,0 +1,11 @@
+#!/bin/bash
+
+time=$(date "+%Y%m%d%H")
+
+for path in `ls`
+do
+    if [ -f $path/dockerfile ]; then
+        docker build -t $path:$time $path
+        docker push registry.cn-hongkong.aliyuncs.com/acm-recentcontests/$path:$time
+    fi    
+done

@@ -1,12 +1,15 @@
 language: java
 
+jdk:
+  - openjdk8
+
+services:
+  - docker
+
 addons:
   apt:
     packages:
     - sshpass
-
-jdk:
-  - openjdk8
 
 cache:
   directories:
@@ -16,53 +19,9 @@ install:
   - ssh-keyscan ${gatewayip} >> ~/.ssh/known_hosts
 
 script:
-  - cd acm-dependencies
-  - mvn clean install
-  - cd ..
-
-  - cd acm-commons-utils
-  - mvn clean install
-  - cd ..
-
-  - cd acm-commons-controller
-  - mvn clean install
-  - cd ..
-
-  - cd acm-gateway
-  - mvn clean package -DskipTests=true
-  - sshpass -p ${gatewaypwd} scp target/*.jar root@${gatewayip}:/root/gateway
-  - cd ..
-
-  - cd acm-service-mail
-  - mvn clean package -DskipTests=true
-  - sshpass -p ${gatewaypwd} scp target/*.jar root@${gatewayip}:/root/gateway
-  - cd ..
-
-  - cd acm-service-remind
-  - mvn clean package -DskipTests=true
-  - sshpass -p ${gatewaypwd} scp target/*.jar root@${gatewayip}:/root/gateway
-  - cd ..
-
-  - cd acm-service-userinfo
-  - mvn clean package -DskipTests=true
-  - sshpass -p ${gatewaypwd} scp target/*.jar root@${gatewayip}:/root/gateway
-  - cd ..
-
-#  - cp ../../dockerfile .
-#  - echo >> dockerfile
-#  - echo 'COPY acm-gateway-1.0.jar /app/' >> dockerfile
-#  - echo 'CMD java -jar /app/acm-gateway-1.0.jar' >> dockerfile
-#  - sshpass -p ${gatewaypwd} ssh -o StrictHostKeyChecking=no root@${gatewayip} 'docker stop gateway' || true
-#  - sshpass -p ${gatewaypwd} ssh -o StrictHostKeyChecking=no root@${gatewayip} 'docker rm gateway' || true
-#  - sshpass -p ${gatewaypwd} ssh -o StrictHostKeyChecking=no root@${gatewayip} 'docker rmi gateway' || true
-#  - sshpass -p ${gatewaypwd} ssh -o StrictHostKeyChecking=no root@${gatewayip} 'mkdir /root/gateway' || true
-#  - sshpass -p ${gatewaypwd} scp acm-gateway-1.0.jar dockerfile root@${gatewayip}:/root/gateway
-#  - sshpass -p ${gatewaypwd} ssh -o StrictHostKeyChecking=no root@${gatewayip} 'docker build -t gateway /root/gateway'
-#  - sshpass -p ${gatewaypwd} ssh -o StrictHostKeyChecking=no root@${gatewayip} 'docker run -d --network host --name gateway --restart=always  gateway'
-after_success:
-- sshpass -p ${gatewaypwd} ssh -o StrictHostKeyChecking=no root@${gatewayip} 'docker images'
-- sshpass -p ${gatewaypwd} ssh -o StrictHostKeyChecking=no root@${gatewayip} 'docker ps -a'
-
+  - bash start.sh $gatewayip $gatewaypwd acm-dependencies acm-commons-controller acm-commons-utils
+  - docker login --username=$registryp registry.cn-hongkong.aliyuncs.com --password=$registryu >> /dev/null
+  - bash docker.sh
 
 branches:
   only:

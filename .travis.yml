@@ -1,3 +1,4 @@
+dist: xenial
 language: java
 
 jdk:
@@ -19,8 +20,10 @@ install:
   - ssh-keyscan ${gatewayip} >> ~/.ssh/known_hosts
 
 script:
+  - pwd
   - bash start.sh $gatewayip $gatewaypwd acm-dependencies acm-commons-controller acm-commons-utils
   - docker login --username=$registryu registry.cn-hongkong.aliyuncs.com --password=$registryp >> /dev/null
+  - pwd
   - bash docker.sh
 
 branches:

@@ -1,8 +1,8 @@
 #!/bin/bash
-set -x
+
 # -----------------install父类依赖--------------------- 
-ip=$1
-pwd=$2
+ip=$gatewayip
+pwd=$gatewaypwd
 
 for arg; 
 do

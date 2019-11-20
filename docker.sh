@@ -1,5 +1,4 @@
 #!/bin/bash
-set -x
 time=$(date "+%Y%m%d%H")
 
 for path in `ls`

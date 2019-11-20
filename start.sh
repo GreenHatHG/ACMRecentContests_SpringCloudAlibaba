@@ -1,8 +1,10 @@
 #!/bin/bash
 set -e
-# -----------------install父类依赖--------------------- 
+
 ip=$gatewayip
 pwd=$gatewaypwd
+
+# -----------------install父类依赖--------------------- 
 
 for arg;
 do
@@ -10,6 +12,7 @@ do
     then
         continue
     fi
+    echo 'mvn clean install '$arg
     mvn clean install -f $arg/pom.xml
 done
 
@@ -39,6 +42,7 @@ do
     done
     # 判断是不是文件夹
     if [ $flag == 1 ]&&[ -d $path/target ]; then
+        echo 'mvn clean package ' $path
         mvn clean package -f $path/pom.xml
         # 创建文件夹用来存放jar
         sshpass -p $pwd ssh -o StrictHostKeyChecking=no root@$ip 'mkdir -p '${baseFolder}${path} || true

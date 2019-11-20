@@ -1,4 +1,0 @@
-FROM openjdk:8-alpine
-RUN mkdir /app
-COPY target/acm-service-remind-1.0.jar  /app/
-CMD java -jar /app/acm-service-remind-1.0.jar

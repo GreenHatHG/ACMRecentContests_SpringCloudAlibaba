@@ -1,4 +1,0 @@
-FROM openjdk:8-alpine
-RUN mkdir /app
-COPY target/acm-service-userinfo-1.0.jar  /app/
-CMD java -jar /app/acm-service-userinfo-1.0.jar

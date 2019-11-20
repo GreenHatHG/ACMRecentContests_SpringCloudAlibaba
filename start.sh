@@ -42,7 +42,7 @@ do
         mvn clean package -f $path/pom.xml
         # 创建文件夹用来存放jar
         sshpass -p $pwd ssh -o StrictHostKeyChecking=no root@$ip 'mkdir -p '${baseFolder}${path} || true
-        sshpass -p $pwd scp $path/target/*.jar root@$ip:baseFolder+$path
+        sshpass -p $pwd scp $path/target/*.jar root@$ip:${baseFolder}${path}
         jarPath=`ls $path/target | grep jar`
         createDokcerfiler $path $jarPath
     fi

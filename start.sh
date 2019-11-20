@@ -4,14 +4,14 @@
 ip=$1
 pwd=$2
 
-# for arg; 
-# do
-#     if [ $arg==$ip ]||[ $arg==$pwd ];
-#     then
-#         continue
-#     fi
-#     mvn clean install -f $arg/pom.xml
-# done
+for arg; 
+do
+    if [ $arg==$ip ]||[ $arg==$pwd ];
+    then
+        continue
+    fi
+    mvn clean install -f $arg/pom.xml
+done
 
 # -----------------创建dockerfile--------------------- 
 # $1:项目名，$2:jar的相对路径
@@ -39,10 +39,10 @@ do
     done    
     # 判断是不是文件夹
     if [ $flag == 1 ]&&[ -d $path/target ]; then
-        # mvn clean package -f $path/pom.xml
+        mvn clean package -f $path/pom.xml
         # 创建文件夹用来存放jar
-        # sshpass -p $pwd ssh -o StrictHostKeyChecking=no root@$ip 'mkdir -p '$baseFolder$path || true
-        # sshpass -p $pwd scp $path/target/*.jar root@$ip:baseFolder+$path
+        sshpass -p $pwd ssh -o StrictHostKeyChecking=no root@$ip 'mkdir -p '$baseFolder$path || true
+        sshpass -p $pwd scp $path/target/*.jar root@$ip:baseFolder+$path
         jarPath=`ls $path/target | grep jar`
         createDokcerfiler $path $jarPath
     fi

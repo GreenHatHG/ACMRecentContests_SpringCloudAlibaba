@@ -1,0 +1,56 @@
+spring:
+  application:
+    name: acm-gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+    sentinel:
+      transport:
+        port: 8721
+        dashboard: localhost:8080
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+
+      routes:
+        - id: acm-service-userinfo-route
+          uri: lb://acm-service-userinfo
+          predicates:
+            - Path=/api/v2/userinfo/**
+          filters:
+            - StripPrefix=3
+        - id: acm-service-remind-route
+          uri: lb://acm-service-remind
+          predicates:
+            - Path=/api/v2/remind/**
+          filters:
+            - StripPrefix=3 
+server:
+  port: 9000
+
+feign:
+  sentinel:
+    enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    # TRACE
+
+auth:
+  skip:
+    urls: >
+      /api/v2/userinfo/captcha,
+      /api/v2/userinfo/actions/login,
+      /api/v2/userinfo/register_code,
+      /api/v2/userinfo/resetpwd_code,
+      /api/v2/userinfo/actions/register,
+      /api/v2/userinfo/actions/resetpwd

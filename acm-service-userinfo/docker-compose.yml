@@ -1,0 +1,23 @@
+version: "3"
+services:
+  acm-service-userinfo:
+    restart: always
+    image: registry.cn-hongkong.aliyuncs.com/acm-recentcontests/acm-service-userinfo:version
+    ports:
+      - 9501:9601
+
+  userinfom:
+    restart: always
+    image: mongo:4.0.10
+    ports:
+      - 9511:27017
+    command:
+      - --auth
+
+  userinfor:
+    restart: always
+    image: redis:5.0.5-alpine
+    ports:
+      - 9521:6379 
+    command:
+      - --requirepass "userinfor"

@@ -1,0 +1,15 @@
+version: "3"
+services:
+  acm-service-mail:
+    restart: always
+    image: registry.cn-hongkong.aliyuncs.com/acm-recentcontests/acm-service-userinfo:version
+    ports:
+      - 9701:9701
+
+  mailr:
+    restart: always
+    image: redis:5.0.5-alpine
+    ports:
+      - 9711:6379 
+    command:
+      - --requirepass "mailr"

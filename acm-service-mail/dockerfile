@@ -1,8 +1,0 @@
-FROM openjdk:8-alpine
-RUN mkdir /app
-COPY acm-service-mail/target/acm-service-mail-1.0.jar  /app/
-CMD java -jar /app/acm-service-mail-1.0.jar
-FROM openjdk:8-alpine
-RUN mkdir /app
-COPY acm-service-mail/target/acm-service-mail-1.0.jar  /app/
-CMD java -jar /app/acm-service-mail-1.0.jar

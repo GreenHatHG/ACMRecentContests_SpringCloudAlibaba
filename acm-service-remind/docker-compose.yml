@@ -1,0 +1,15 @@
+version: "3"
+services:
+  acm-service-remind:
+    restart: always
+    image: registry.cn-hongkong.aliyuncs.com/acm-recentcontests/acm-service-mail:version
+    ports:
+      - 9701:9701
+
+  remindr:
+    restart: always
+    image: redis:5.0.5-alpine
+    ports:
+      - 9611:6379 
+    command:
+      - --requirepass "remindr"

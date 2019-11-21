@@ -19,9 +19,7 @@ install:
   - ssh-keyscan ${gatewayip} >> ~/.ssh/known_hosts
 
 script:
-  - bash start.sh acm-dependencies acm-commons-controller acm-commons-utils
-#  - docker login --username=$registryu registry.cn-hongkong.aliyuncs.com --password=$registryp
-#  - bash docker.sh
+  - bash start.sh ${gatewayip} ${gatewaypwd} acm-dependencies acm-commons-controller acm-commons-utils
 
 branches:
   only:

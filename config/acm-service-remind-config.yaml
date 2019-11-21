@@ -1,0 +1,66 @@
+spring:
+  datasource:
+    druid:
+      url: jdbc:mysql://127.0.0.1:3306/remind?useUnicode=true&characterEncoding=UTF-8&characterSetResults=utf8&serverTimezone=GMT%2B8&useSSL=false
+      username: root
+      password: 11
+      initial-size: 1
+      min-idle: 1
+      max-active: 20
+      test-on-borrow: true
+      driver-class-name: com.mysql.jdbc.Driver
+
+  application:
+    name: acm-service-remind
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+    sentinel:
+      transport:
+        port: 8719
+        dashboard: 127.0.0.1:8080
+        
+  quartz:
+    auto-startup: true
+    job-store-type: jdbc
+    #初始化表
+    jdbc:
+      initialize-schema: never
+    #属性配置
+    properties:
+      org:
+        quartz:
+          scheduler:
+            #调度器实例名称
+            instanceName: QuartzScheduler
+            #调度器实例编号自动生成
+            instanceId: AUTO
+          jobStore:
+            #持久化方式配置
+            class: org.quartz.impl.jdbcjobstore.JobStoreTX
+            #持久化方式配置数据驱动，MySQL数据库
+            driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+            #quartz相关数据表前缀名
+            tablePrefix: QRTZ_
+            #数据源 随便取
+            dataSource: mysql
+            #调度实例失效的检查时间间隔
+            clusterCheckinInterval: 10000      
+
+server:
+  port: 9701
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+logging:
+  pattern:
+    level: ERROR
+
+feign:
+  sentinel:
+    enabled: true    

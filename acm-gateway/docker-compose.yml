@@ -1,0 +1,7 @@
+version: "3"
+services:
+  acm-gateway:
+    restart: always
+    image: registry.cn-hongkong.aliyuncs.com/acm-recentcontests/acm-gateway:version
+    ports:
+      - 9000:9000  
